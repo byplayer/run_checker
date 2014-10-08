@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-module RunChecker
+class RunChecker
   # version information module
   module VERSION
     STRING =
