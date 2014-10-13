@@ -18,6 +18,14 @@ else
   task default: :spec
 end
 
+begin
+  require 'rubocop/rake_task'
+rescue LoadError
+  puts 'no rubocop'
+else
+  RuboCop::RakeTask.new
+end
+
 Rake::RDocTask.new do |rdoc|
   begin
     version = File.read('VERSION').chomp
@@ -48,4 +56,4 @@ end
 Gem::PackageTask.new(gemspec) do |pkg|
   pkg.gem_spec = gemspec
 end
-task gem: :gemspec
+
