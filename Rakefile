@@ -4,6 +4,7 @@ require 'rdoc'
 require 'rake'
 require 'rdoc/task'
 require 'rubygems/package_task'
+require 'bundler/setup'
 
 begin
   require 'rspec/core/rake_task'
@@ -12,7 +13,6 @@ rescue LoadError
 else
   RSpec::Core::RakeTask.new(:spec) do |t|
     t.ruby_opts = '-w'
-    t.rcov = false
   end
 
   task default: :spec
