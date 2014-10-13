@@ -1,2 +1,3 @@
-.bundle
-rdoc
+/.bundle
+/rdoc
+/pkg
