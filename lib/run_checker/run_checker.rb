@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'log4r'
+require 'English'
 
 # This is class to check duplicated run
 class RunChecker
@@ -35,10 +36,10 @@ class RunChecker
       end
 
       if exist_process(pid)
-        logger.error("other process is running: pid(#{pid})")
+        @logger.error("other process is running: pid(#{pid})")
         return false
       else
-        logger.warn("process was exited pid(#{pid})")
+        @logger.warn("process was exited pid(#{pid})")
         File.delete(@lock_path)
       end
     end
@@ -46,7 +47,7 @@ class RunChecker
     File.open(@lock_path, 'w') do |f|
       locked = f.flock(File::LOCK_EX | File::LOCK_NB)
       if locked
-        f.puts $PID
+        f.puts $PROCESS_ID
         return true
       else
         @logger.error("lock failed -> pid: #{$PID}")
