@@ -16,7 +16,7 @@ class RunChecker
 
     return if @logger
 
-    formatter = Log4r::PatternFormatter.new(pattern: '%d [%l]: %M',
+    formatter = Log4r::PatternFormatter.new(pattern: '%d [%l]:%p: %M',
                                             date_format: '%Y.%m.%d %H:%M:%S')
     outputter = Log4r::StdoutOutputter.new('RunCheckerOutPutter',
                                            formatter: formatter)
@@ -36,10 +36,11 @@ class RunChecker
       end
 
       if exist_process(pid)
-        @logger.error("other process is running: pid(#{pid})")
+        @logger.info("other process is running: pid(#{pid})")
         return false
       else
-        @logger.warn("process was exited pid(#{pid})")
+        @logger.warn("process was finished pid(#{pid}), " +
+                      'cleanup lock file and start new process')
         File.delete(@lock_path)
       end
     end
@@ -57,7 +58,18 @@ class RunChecker
   end
 
   def cleanup
-    File.delete(@lock_path)
+    return unless File.exist? @lock_path
+
+    pid = 0
+    File.open(@lock_path, 'r') do |f|
+      pid = f.read.chomp!.to_i
+    end
+
+    if pid == $PROCESS_ID
+      File.delete(@lock_path)
+    else
+      @logger.info('lock file was created by other process')
+    end
   end
 
   private
@@ -66,7 +78,7 @@ class RunChecker
     Process.getpgid(pid)
     return true
   rescue => ex
-    @logger.error("check process error pid(#{pid}): #{ex}\n" +
+    @logger.info("check process error pid(#{pid}): #{ex}\n" +
                   ex.backtrace.join("\n  "))
     return false
   end
