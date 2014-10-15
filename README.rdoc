@@ -1,3 +1,8 @@
+= What is this ?
 This is library to check duplicate running
 
+= Travis
+[![Build Status](https://travis-ci.org/byplayer/run_checker.svg)](https://travis-ci.org/byplayer/run_checker)
+
+= License
 This program is provided under MIT license.
