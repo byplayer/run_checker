@@ -54,8 +54,9 @@ gemspec = Gem::Specification.new do |s|
   s.version = RunChecker::VERSION::STRING
   s.authors = ['byplayer']
   s.date = '2014-10-07'
-  s.description = 'The duplicated running checker'
+  s.description = 'The duplicated running checker to support batch process'
   s.email = ['byplayer100@gmail.com']
+  s.licenses = 'MIT license'
   s.extra_rdoc_files = [
     'README.rdoc'
   ]
@@ -76,7 +77,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary = 'The duplicated running checker'
   s.test_files = Dir.glob('spec/**/*')
 
-  s.add_dependency('log4r')
+  s.add_dependency('log4r', '~> 0')
 end
 
 Gem::PackageTask.new(gemspec) do |pkg|
