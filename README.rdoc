@@ -1,6 +1,7 @@
 = What is this ?
-This is library to check duplicate running
 {<img src="https://badge.fury.io/rb/run_checker.png" alt="Gem Version" />}[http://badge.fury.io/rb/run_checker]
+
+This is library to check duplicate running
 
 = Travis
 {<img src="https://travis-ci.org/byplayer/run_checker.svg" alt="Build Status" />}[https://travis-ci.org/byplayer/run_checker]
