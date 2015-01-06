@@ -1,0 +1,5 @@
+= 0.1.1
+- fix dependency for log4r
+
+= 0.1.0
+- first release
