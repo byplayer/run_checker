@@ -77,7 +77,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary = 'The duplicated running checker'
   s.test_files = Dir.glob('spec/**/*')
 
-  s.add_dependency('log4r', '~> 0')
+  s.add_dependency('log4r', '>= 1.1')
 end
 
 Gem::PackageTask.new(gemspec) do |pkg|
