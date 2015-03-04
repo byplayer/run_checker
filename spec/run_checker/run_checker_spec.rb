@@ -47,4 +47,9 @@ describe RunChecker do
 
     expect(File.exist?(@lock_file_path)).to eq(true)
   end
+
+  it 'empty file' do
+    FileUtils.touch(@lock_file_path)
+    expect(@run_checker.lock).to eq(true)
+  end
 end

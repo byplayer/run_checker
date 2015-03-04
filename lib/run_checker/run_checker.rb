@@ -35,7 +35,7 @@ class RunChecker
         pid = f.read.chomp!.to_i
       end
 
-      if exist_process(pid)
+      if 0 != pid && exist_process(pid)
         @logger.info("other process is running: pid(#{pid})")
         return false
       else
