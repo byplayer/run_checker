@@ -29,6 +29,11 @@ class RunChecker
   #   If this method returns true, other process didn't run.
   #   If this method returns false, other process runs.
   def lock
+    if !@lock_path || @lock_path.empty?
+      @logger.warn('lock file pass is nil')
+      return true
+    end
+
     if File.exist? @lock_path
       pid = 0
       File.open(@lock_path, 'r') do |f|
@@ -58,6 +63,7 @@ class RunChecker
   end
 
   def cleanup
+    return if !@lock_path || @lock_path.empty?
     return unless File.exist? @lock_path
 
     pid = 0

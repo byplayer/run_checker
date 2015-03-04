@@ -52,4 +52,14 @@ describe RunChecker do
     FileUtils.touch(@lock_file_path)
     expect(@run_checker.lock).to eq(true)
   end
+
+  it 'nil lock file lock' do
+    expect(RunChecker.new(nil).lock).to eq(true)
+  end
+
+  it 'nil lock file cleanup' do
+    expect do
+      RunChecker.new(nil).cleanup
+    end.to_not raise_error
+  end
 end
